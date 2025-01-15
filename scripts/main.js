@@ -33,7 +33,6 @@ class HomePage{
     }
 
    async renderFirstPlanet(data){
-        let firstPlanet
         data = await this.data
         const dataLength = data.length
         if(dataLength > 1){
@@ -44,19 +43,14 @@ class HomePage{
 
     render(data){
         this.body.replaceChildren(this.createNavDOM(data))
-        if(data.length > 1){
-            console.log(document.querySelector("main"))
-           
+        if(data.length > 1){           
             this.body.appendChild(this.mainContent.renderInfo(data[0]))
-            console.log(document.querySelector("body"))
-            console.log(document.querySelector("main"))
-            console.log(document.querySelector(".planet__img"))
             document.querySelector(".planet__content-container").insertBefore(this.contentNav.render(), document.querySelector(".planet_img"))
-            console.log(document.querySelector(".planet__description").textContent = data[0].overview.content)
-            console.log(document.querySelector(".planet__img").src = data[0].images.planet)
-            console.log(document.querySelector(".planet__link").setAttribute("href", data[0].overview.source))
-            return this.body
+            document.querySelector(".planet__description").textContent = data[0].overview.content
+            document.querySelector(".planet__img").src = data[0].images.planet
+            document.querySelector(".planet__link").setAttribute("href", data[0].overview.source)
         }
+        
         return this.body
     }
 
