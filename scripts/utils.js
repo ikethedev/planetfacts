@@ -29,9 +29,7 @@ const createLink = (href, text, target, idName, className) => {
     return link;
 };
 
-const onScreenChange = () => {
-    console.log("hello")
-}
-export {createImg, createElement, createLink, onScreenChange}
+
+export {createImg, createElement, createLink}
 export default getData
 

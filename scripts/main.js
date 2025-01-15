@@ -1,8 +1,8 @@
-import {createElement, createImg, onScreenChange}from "./utils.js";
+import {createElement, createImg}from "./utils.js";
 import getData from "./utils.js";
-import NavBar from "./navBar.js"
-import MainContent from "./mainContent.js";
-import ContentNav from "./contentNavigation.js";
+import NavBar from "./navBar/navBar.js"
+import MainContent from "../scripts/mainContent/mainContent.js";
+import ContentNav from "./contentNavigation/contentNavigation.js";
 
 class HomePage{
     constructor(data) {

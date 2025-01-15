@@ -1,4 +1,4 @@
-import NavBar from "../navBar.js";
+import NavBar from "../navBar/navBar.js";
 
 const contentNavTemplate = document.createElement("template");
 contentNavTemplate.innerHTML = `
