@@ -13,12 +13,18 @@ class MainContent {
         this.createPlanetImg = this.createPlanetImg.bind(this);
   }
 
-  setData(data){
-    this.data = data 
-  }
+  setData(currentPlanet) {
+    this.currentPlanet = currentPlanet;
+    // Update the main content with the current planet
+    console.log("MainContent updated with:", currentPlanet);
+}
  
+getData(){
+  return this.currentPlanet
+}
   createPlanetStats(data) {
-    const currentPlanet = data; 
+    const currentPlanet = this.getData(); 
+    console.log(currentPlanet)  
     const planetStats = createElement("div", null, "stats", null)
     const rotationDiv = createElement("div", null, "stat__div", null)
     const rotationTitle = createElement("h4", null, "planet__stat-title", "Rotation Time")
@@ -60,6 +66,9 @@ class MainContent {
 
 
   createPlanetImg(data, img) {
+    const contentNav = new ContentNav()
+    console.log(contentNav.getActiveTab())
+    console.log("hello")
     const currentPlanet = data
     const planetImg = createImg(img, `This is a picture of the ${currentPlanet.name}`)
     planetImg.classList.add("planet__img")
@@ -67,6 +76,7 @@ class MainContent {
   }
 
   createPlanetContent(data, content) {
+    console.log("hello")
     const currentPlanet = data;
     const planet = createElement("div", null, "planet", null);
     const planetContentDiv = createElement("div", null, "planet__header", null);
@@ -86,7 +96,7 @@ class MainContent {
   }
 
   renderInfo(data, content, img) {
-  
+    console.log("hello again")
     //     // 1. Create planet content
         const planetContent = this.createPlanetContent(data, content); 
     //     // 2. Create planet stats

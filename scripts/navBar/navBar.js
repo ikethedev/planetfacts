@@ -17,6 +17,7 @@ export default class NavBar{
         //this.selectPlanet = this.selectPlanet.bind(this);
        // this.filterData = this.filterData.bind(this);
        
+      
     }
 
     render(){
@@ -24,8 +25,9 @@ export default class NavBar{
     }
 
 
-    updatePlanet(data){
-        console.log(data)
+    updatePlanet(currentPlanet) {
+        // Update the navigation bar with currentPlanet-specific data
+        console.log("NavBar updated with:", currentPlanet.name);
     }
    
     async createNav(){

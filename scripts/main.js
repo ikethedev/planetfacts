@@ -8,28 +8,46 @@ class HomePage{
     constructor(data) {
         this.contentNav = new ContentNav(data);
         this.contentNav.homePage = this;
+        this.currentPlanet = null;
         const pendingData = getData();
         this.body = document.querySelector("body");
         this.createNavDOM = this.createNavDOM.bind(this);
         this.selectPlanet = this.selectPlanet.bind(this)
+        this.setCurrentPlanet = this.setCurrentPlanet.bind(this)
         this.filterData = this.filterData.bind(this)
         this.mainContent = new MainContent()
         this.contentNav = new ContentNav()
         this.navBar = new NavBar()
         pendingData.then(data => {
             console.log(data)
+            // init the page on load
             this.setData(data)
         });
 
-        document.querySelector("body").addEventListener("resize", onScreenChange)
+        
+
     }
 
     setData(data){
         this.data = data
+        console.log(this.data)
+        if (!this.currentPlanet) {
+            this.setCurrentPlanet(data[0]);
+        }
+
         this.navBar.updatePlanet(data)
         this.contentNav.setData(data)
         this.mainContent.setData(data)
         this.render(data)
+    }
+
+    setCurrentPlanet(planet){
+        this.currentPlanet = planet
+    }
+
+    getCurrentPlanet(){
+        console.log(this.currentPlanet)
+        return this.currentPlanet
     }
 
    async renderFirstPlanet(data){
@@ -98,7 +116,7 @@ class HomePage{
     }
 
     setActive(e, data){
-        console.log(e.target)
+        console.log(document.querySelector(".planet__content-container")) 
         if(e.target.parentElement === document.querySelector(".planet__names")) return
         this.removeActive()
         console.log(data)
@@ -128,23 +146,37 @@ class HomePage{
     }
 
     selectPlanet(e){
-        console.log(document.querySelector(".content__nav"))
         const planetName = e.target.textContent;
-        console.log(planetName) 
         const planet = this.filterData(planetName);
+        const currentPlanet = planet[0]
+        console.log(currentPlanet)
+        
+        this.setCurrentPlanet(planet)
+        const activeTab = this.contentNav.getActiveTab();
+        console.log(activeTab)
         this.changeActiveColor(planet)
+
+        if (currentPlanet && activeTab && currentPlanet[activeTab] && currentPlanet[activeTab].content) {
+            console.log(currentPlanet[activeTab].content);
+        } else {
+            console.error("Invalid currentPlanet, activeTab, or data structure:", { currentPlanet, activeTab });
+            console.log(currentPlanet[activeTab])
+        }
         if(screen.width >= 1440){
             this.setActive(e, planetName)
         }
         //this.contentNav.updateContent()
-      
-        const currentPlanet = planet[0]
-        const name = currentPlanet.name
-        document.querySelector(".planet__name").textContent = name;
-        document.querySelector(".planet__description").textContent = currentPlanet.overview.content;
-        console.log(currentPlanet.overview.source)
-        document.querySelector(".planet__link").setAttribute("href", currentPlanet.overview.source)  
-        document.querySelector(".planet__img").src = currentPlanet.images.planet
+        this.navBar.updatePlanet(currentPlanet);
+        this.contentNav.setData(currentPlanet);
+        this.mainContent.setData(currentPlanet);
+        console.log(currentPlanet)
+        console.log(activeTab)
+        console.log(currentPlanet[activeTab].content)
+  
+        document.querySelector(".planet__name").textContent = currentPlanet.name;
+        document.querySelector(".planet__description").textContent = currentPlanet[activeTab].content;
+        document.querySelector(".planet__link").setAttribute("href", currentPlanet[activeTab].source)  
+        document.querySelector(".planet__img").src = currentPlanet.images[activeTab]
         document.querySelector(".rotation").textContent = currentPlanet.rotation
         document.querySelector(".revolution").textContent = currentPlanet.revolution
         document.querySelector(".radius").textContent = currentPlanet.radius
