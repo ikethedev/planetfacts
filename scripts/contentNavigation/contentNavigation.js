@@ -14,7 +14,6 @@ contentNavTemplate.innerHTML = `
 class ContentNav{
     constructor(data, homePage) {
         this.data = data;
-        console.log(this.data)
         this.activeTab = "overview"; 
         this.currentPlanet = "mercury"
         this.rootElement = contentNavTemplate.content.cloneNode(true);
@@ -24,7 +23,6 @@ class ContentNav{
             element.addEventListener("click", (e) => {
                 const planetData = home.getCurrentPlanet()
                 this.setActive(e, planetData)
-                console.log(this.getActiveTab())
                 // grabs the textContent of the contentNav
                 const listItem = this.getActiveTab()
                 this.updateTabContent(listItem, planetData); // Update content based on the tab
@@ -61,29 +59,13 @@ class ContentNav{
         })
     }
 
-    setActive(e, planet){
-        console.log(e.target.dataset.tab)
-        console.log(document.querySelector(".planet__content-container"))
+    setActive(e, planet){        
         this.removeActive()
-        let width = screen.width
-        console.log(width)
-        if(width < 768){
-            e.target.classList.add("active__section")
-            document.querySelector(".active__section").style.borderBottomColor = `#${planet.color}`; 
-        } else {
-            e.target.classList.add("active__tablet")
-            document.querySelector('.active__tablet').style.backgroundColor = `#${planet.color}`
-        }
-
-        // Update activeTab property
         this.activeTab = e.target.dataset.tab;
-        console.log(this.activeTab)
     }
     
     setData(currentPlanet) {
         this.currentPlanet = currentPlanet;
-        // Update the content navigation with the current planet
-        console.log("ContentNav updated with:", currentPlanet);
     }
 
     getData(){
@@ -91,10 +73,12 @@ class ContentNav{
       }
 
     updateSrc(listItem, planet){
-        console.log(this.data)
-        const currentPlanet = this.getData(); 
+        const data =  home.getCurrentPlanet()
+        let currentPlanet = data[0];
         const infoTitle = this.activeTab
-        console.log(this.activeTab)
+        if(currentPlanet === undefined){
+            currentPlanet = home.getCurrentPlanet()
+        }
         let src
         switch(infoTitle) {
             case 'overview':
@@ -114,9 +98,14 @@ class ContentNav{
     }
 
     updateContent(listItem, planet){
-        const infoTitle = listItem.toLowerCase().trim()
+        const infoTitle = this.activeTab
         console.log(infoTitle)
-
+        let data =  home.getCurrentPlanet()
+        let currentPlanet = data[0];
+        if(currentPlanet === undefined){
+            currentPlanet = home.getCurrentPlanet()
+        }
+        console.log(currentPlanet)
          let content
         switch(infoTitle) {
             case 'overview':
@@ -125,30 +114,34 @@ class ContentNav{
             case 'internal':
                 content = currentPlanet.internal.content;
                 break;
-            case 'sur':
+            case 'surface':
                 content = currentPlanet.surface.content;
                 break;
             default:
                 console.log('Property not found.');
         }
-        console.log(content)
         return content
     }
 
     updateImg(listItem, planet){
-        const infoTitle = listItem.toLowerCase().trim()
-        const currentPlanet = this.getData(); 
-
+        const infoTitle = this.activeTab
+        const data =  home.getCurrentPlanet()
+        let currentPlanet = data[0];
+        if(currentPlanet === undefined){
+            currentPlanet = home.getCurrentPlanet()
+        }
          let img
+         
         switch(infoTitle) {
             case 'overview':
+                console.log(currentPlanet.images.planet)
                 img = currentPlanet.images.planet;
                 break;
             case 'internal':
                 img = currentPlanet.images.internal;
                 break;
             case 'surface':
-                img = currentPlanet.images["surface geology"];
+                img = currentPlanet.images.surface;
                 break;
             default:
                 console.log('Property not found.');

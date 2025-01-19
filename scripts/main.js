@@ -6,6 +6,7 @@ import ContentNav from "./contentNavigation/contentNavigation.js";
 
 class HomePage{
     constructor(data) {
+        
         this.contentNav = new ContentNav(data);
         this.contentNav.homePage = this;
         this.currentPlanet = null;
@@ -19,18 +20,13 @@ class HomePage{
         this.contentNav = new ContentNav()
         this.navBar = new NavBar()
         pendingData.then(data => {
-            console.log(data)
             // init the page on load
             this.setData(data)
-        });
-
-        
-
+        });  
     }
 
     setData(data){
         this.data = data
-        console.log(this.data)
         if (!this.currentPlanet) {
             this.setCurrentPlanet(data[0]);
         }
@@ -46,17 +42,9 @@ class HomePage{
     }
 
     getCurrentPlanet(){
-        console.log(this.currentPlanet)
-        return this.currentPlanet
-    }
-
-   async renderFirstPlanet(data){
-        data = await this.data
-        const dataLength = data.length
-        if(dataLength > 1){
-            firstPlanet = await this.getFirstPlanet()
-            return
-        }
+       const data = this.currentPlanet
+       const currentPlanent = data;
+       return this.currentPlanet
     }
 
     render(data){
@@ -67,8 +55,8 @@ class HomePage{
             document.querySelector(".planet__description").textContent = data[0].overview.content
             document.querySelector(".planet__img").src = data[0].images.planet
             document.querySelector(".planet__link").setAttribute("href", data[0].overview.source)
+            document.querySelector(".nav__list-item").classList.add("active__section")
         }
-        
         return this.body
     }
 
@@ -81,7 +69,6 @@ class HomePage{
     mobileMenu.classList.add("mobile__menu-icon")
     const ul = createElement('ul', "", "planet__names hide");
     names.forEach(planet => {
-        console.log(planet.color)
         const div = createElement("div", "", "li__div")
         const li = createElement("li", "", "", planet.name)
         const bullet = createElement("div", "", "nav__bullet")
@@ -119,64 +106,28 @@ class HomePage{
         console.log(document.querySelector(".planet__content-container")) 
         if(e.target.parentElement === document.querySelector(".planet__names")) return
         this.removeActive()
-        console.log(data)
-        const planet = this.data.filter(planet => planet.name === data)
-        let currentPlanet = planet[0]
-        console.log(currentPlanet.color)
-        e.target.parentElement.classList.add("active__desktop")
-
-        document.querySelector(".active__desktop").style.borderTopColor = `#${currentPlanet.color}`
-        console.log("hello")
-    }
-
-    checkScreenSize(){
-        console.log(screen.width)
     }
     
-    //this contentNav color on new planet click
-    changeActiveColor(planet){
-        const list = document.querySelectorAll(".nav__list-item")
-        list.forEach(item => {
-            if(item.style.backgroundColor !== 'transparent'){
-                item.style.backgroundColor = `#${planet[0].color}`
-                console.log(planet[0].color)
-            }
-        })
-        
-    }
-
     selectPlanet(e){
         const planetName = e.target.textContent;
         const planet = this.filterData(planetName);
-        const currentPlanet = planet[0]
-        console.log(currentPlanet)
-        
-        this.setCurrentPlanet(planet)
+        const currentPlanet = planet[0];
         const activeTab = this.contentNav.getActiveTab();
-        console.log(activeTab)
-        this.changeActiveColor(planet)
 
-        if (currentPlanet && activeTab && currentPlanet[activeTab] && currentPlanet[activeTab].content) {
-            console.log(currentPlanet[activeTab].content);
-        } else {
-            console.error("Invalid currentPlanet, activeTab, or data structure:", { currentPlanet, activeTab });
-            console.log(currentPlanet[activeTab])
-        }
-        if(screen.width >= 1440){
-            this.setActive(e, planetName)
-        }
+        console.log(currentPlanet.images)
+        console.log(activeTab)
+        this.setCurrentPlanet(planet)
+        console.log(currentPlanet.images[activeTab])
         //this.contentNav.updateContent()
         this.navBar.updatePlanet(currentPlanet);
         this.contentNav.setData(currentPlanet);
         this.mainContent.setData(currentPlanet);
-        console.log(currentPlanet)
-        console.log(activeTab)
-        console.log(currentPlanet[activeTab].content)
-  
+       
         document.querySelector(".planet__name").textContent = currentPlanet.name;
         document.querySelector(".planet__description").textContent = currentPlanet[activeTab].content;
         document.querySelector(".planet__link").setAttribute("href", currentPlanet[activeTab].source)  
-        document.querySelector(".planet__img").src = currentPlanet.images[activeTab]
+        // only for the first render
+        document.querySelector(".planet__img").src = currentPlanet.images["planet"]
         document.querySelector(".rotation").textContent = currentPlanet.rotation
         document.querySelector(".revolution").textContent = currentPlanet.revolution
         document.querySelector(".radius").textContent = currentPlanet.radius
@@ -193,13 +144,6 @@ class HomePage{
 
 
 const home = new HomePage()
-window.addEventListener("resize", () => {
-    const width  = screen.width
-    if(width < 768){
-        console.log("ddd") 
-    } else {
-        console.log("aaa")
-    }
-})
+
 export default HomePage
 export {home}

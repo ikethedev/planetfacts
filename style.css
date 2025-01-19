@@ -525,17 +525,9 @@ STATS END
     opacity: 0.2;
 }
 
-.active__section{
-    border-bottom: 3px solid;
-}
 
-.active__tablet{
-    color: white;
-}
 
-.active__desktop{
-    border-top: 3px solid;
-}
+
 
 @media screen and (min-width: 768px) {
     .hide{

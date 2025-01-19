@@ -46,7 +46,7 @@
     "images": {
       "planet": "./assets/planet-venus.svg",
       "internal": "./assets/planet-venus-internal.svg",
-      "surface geology": "./assets/geology-venus.png"
+      "surface": "./assets/geology-venus.png"
     }
   },
   {
@@ -71,7 +71,7 @@
     "images": {
       "planet": "./assets/planet-earth.svg",
       "internal": "./assets/planet-earth-internal.svg",
-      "surface geology": "./assets/geology-earth.png"
+      "surface": "./assets/geology-earth.png"
     }
   },
   {
@@ -96,7 +96,7 @@
     "images": {
       "planet": "./assets/planet-mars.svg",
       "internal": "./assets/planet-mars-internal.svg",
-      "surface geology": "./assets/geology-mars.png"
+      "surface": "./assets/geology-mars.png"
     }
   },
   {
@@ -121,7 +121,7 @@
     "images": {
       "planet": "./assets/planet-jupiter.svg",
       "internal": "./assets/planet-jupiter-internal.svg",
-      "surface geology": "./assets/geology-jupiter.png"
+      "surface": "./assets/geology-jupiter.png"
     }
   },
   {
@@ -146,7 +146,7 @@
     "images": {
       "planet": "./assets/planet-saturn.svg",
       "internal": "./assets/planet-saturn-internal.svg",
-      "surface geology": "./assets/geology-saturn.png"
+      "surface": "./assets/geology-saturn.png"
     }
   },                                                          
   {
