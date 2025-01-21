@@ -70,6 +70,8 @@ MAIN NAV STARTS
     position: relative;
     z-index: 100;
     width: 100vw;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 
@@ -122,8 +124,9 @@ main{
 
 @media screen and (min-width: 1440px) {
     .planet__names{
+        gap: 8px;
         padding-top: 0;
-        width: 50%;
+        width: 75%;
     }
 
 }
@@ -317,6 +320,8 @@ CONTENT NAV ENDS
     display: flex;
     flex-direction: column;
     justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 
 @media screen and (min-width: 768px) {
@@ -442,6 +447,9 @@ STATS STARTS
     display: flex;
     flex-direction: column;
     gap: 8px;
+    color: white;
+    margin: 0 auto;
+    max-width: 1000px;
 }
 
 @media screen and (min-width: 768px) {

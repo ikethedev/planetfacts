@@ -23,7 +23,7 @@ getData(){
   return this.currentPlanet
 }
   createPlanetStats(data) {
-    const currentPlanet = this.getData(); 
+    const currentPlanet = home.getCurrentPlanet(); 
     console.log(currentPlanet)  
     const planetStats = createElement("div", null, "stats", null)
     const rotationDiv = createElement("div", null, "stat__div", null)
@@ -41,7 +41,7 @@ getData(){
 
     rotationDiv.appendChild(rotationTitle)
     rotationDiv.appendChild(rotationTime)
-
+    console.log(rotationTime)
     revolutionDiv.appendChild(revolutionTitle)
     revolutionDiv.appendChild(revolutionTime)
 
@@ -107,7 +107,7 @@ getData(){
         const planet = createElement('div', null, "planet__content-container");
         planet.appendChild(planetImg); 
         planet.appendChild(planetContent);
-        
+        console.log(planetStats)
         const stats = createElement("div")
         stats.appendChild(planetStats);
         main.appendChild(planet)
