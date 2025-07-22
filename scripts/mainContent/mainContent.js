@@ -1,6 +1,6 @@
 import ContentNav from "../contentNavigation/contentNavigation.js";
 import HomePage, { home } from "../main.js";
-import getData, { createElement, createImg, createLink } from "../utils.js";
+import getData, { createElement, createImg, createLink } from "..utils.js";
 
 class MainContent {
   constructor(data) {

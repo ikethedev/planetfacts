@@ -1,7 +1,7 @@
 import {createElement, createImg}from "./utils.js";
 import getData from "./utils.js";
 import NavBar from "./navBar/navBar.js"
-import MainContent from "../scripts/mainContent/mainContent.js";
+import MainContent from "./mainContent/mainContent.js";
 import ContentNav from "./contentNavigation/contentNavigation.js";
 
 class HomePage{
